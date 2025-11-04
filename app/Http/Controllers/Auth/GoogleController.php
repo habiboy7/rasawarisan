@@ -57,6 +57,6 @@ class GoogleController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->intended('/')->with('success', 'Berhasil Login');
+        return redirect()->intended('/dashboard')->with('success', 'Berhasil Login');
     }
 }
