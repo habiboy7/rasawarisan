@@ -6,7 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800">
-    <flux:header container class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <flux:header class="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
         <a href="{{ route('dashboard') }}" class="ms-2 me-5 flex items-center space-x-2 rtl:space-x-reverse lg:ms-0"
@@ -14,11 +14,23 @@
             <x-app-logo />
         </a>
 
-        <flux:navbar class="-mb-px max-lg:hidden">
-            <flux:navbar.item icon="layout-grid" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                wire:navigate>
-                {{ __('Dashboard') }}
-            </flux:navbar.item>
+        <flux:spacer />
+
+
+        <flux:navbar class="flex gap-6">
+            <flux:dropdown>
+                <flux:navbar.item icon:trailing="chevron-down">Destinasi</flux:navbar.item>
+
+                <flux:navmenu>
+                    <flux:navmenu.item href="#">Profile</flux:navmenu.item>
+                    <flux:navmenu.item href="#">Settings</flux:navmenu.item>
+                    <flux:navmenu.item href="#">Billing</flux:navmenu.item>
+                </flux:navmenu>
+            </flux:dropdown>
+            <flux:navbar.item href="#" current>Peta</flux:navbar.item>
+            <flux:navbar.item href="#">Mitra</flux:navbar.item>
+            <flux:navbar.item href="#">ResepAI</flux:navbar.item>
+            <flux:navbar.item href="#">Event</flux:navbar.item>
         </flux:navbar>
 
         <flux:spacer />
@@ -28,17 +40,9 @@
                 <flux:navbar.item class="!h-10 [&>div>svg]:size-5" icon="magnifying-glass" href="#"
                     :label="__('Search')" />
             </flux:tooltip>
-            <flux:tooltip :content="__('Repository')" position="bottom">
-                <flux:navbar.item class="h-10 max-lg:hidden [&>div>svg]:size-5" icon="folder-git-2"
-                    href="https://github.com/laravel/livewire-starter-kit" target="_blank" :label="__('Repository')" />
-            </flux:tooltip>
-            <flux:tooltip :content="__('Documentation')" position="bottom">
-                <flux:navbar.item class="h-10 max-lg:hidden [&>div>svg]:size-5" icon="book-open-text"
-                    href="https://laravel.com/docs/starter-kits#livewire" target="_blank" label="Documentation" />
-            </flux:tooltip>
         </flux:navbar>
 
-        <!-- Desktop User Menu -->
+        <!-- Login/profile -->
         @if (Auth::check())
             <flux:dropdown position="top" align="end" class="me-1.5 max-lg:hidden">
                 <flux:profile class="cursor-pointer" :initials="auth()->user()->initials()" />
@@ -81,9 +85,10 @@
                 </flux:menu>
             </flux:dropdown>
         @else
-            <a href="/login" class="text-black text-sm font-medium">Login</a>
-            <span class="text-black text-sm">|</span>
-            <a href="/register" class="text-black text-sm font-medium">Register</a>
+            <div class="flex gap-2">
+                <flux:button variant="subtle" href="/register">Daftar</flux:button>
+                <flux:button variant="primary" color="orange" href="/login">Masuk</flux:button>
+            </div>
         @endif
 
     </flux:header>
@@ -97,6 +102,7 @@
             <x-app-logo />
         </a>
 
+        {{-- login/profile --}}
         @if (Auth::check())
             <flux:dropdown position="top" align="end">
                 <flux:profile class="cursor-pointer" :initials="auth()->user()->initials()" />
@@ -140,9 +146,10 @@
                 </flux:menu>
             </flux:dropdown>
         @else
-            <a href="/login" class="text-black text-sm font-medium">Login</a>
-            <span class="text-black text-sm">|</span>
-            <a href="/register" class="text-black text-sm font-medium">Register</a>
+            <div class="flex gap-2 ">
+                <flux:button variant="subtle" href="/register">Daftar</flux:button>
+                <flux:button variant="primary" color="orange" href="/login">Masuk</flux:button>
+            </div>
         @endif
 
         <flux:navlist variant="outline">
