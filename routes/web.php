@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\GoogleController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 })->name('home');
 
 Route::view('dashboard', 'dashboard')
