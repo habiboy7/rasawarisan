@@ -1,20 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\GoogleController;
 
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('home');
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');

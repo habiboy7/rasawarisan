@@ -5,7 +5,7 @@
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
 
-        <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-5">
+        <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
             @csrf
             <!-- Name -->
             <flux:input name="name" :label="__('Name')" type="text" required autofocus autocomplete="name"
@@ -29,7 +29,7 @@
                 </flux:button>
             </div>
 
-            <p class="text-md text-center">or</p>
+            <flux:separator text="or" />
 
             <flux:button href="{{ route('google.redirect') }}" class="w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
