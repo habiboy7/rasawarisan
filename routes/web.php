@@ -6,18 +6,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\GoogleController;
 
-// ✅ Beranda utama bisa diakses semua orang
+// Beranda utama bisa diakses semua orang
 Route::get('/', [DashboardController::class, 'index'])->name('home');
 Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 // Jika masih ada route lama
 Route::redirect('/dashboard', '/home')->name('dashboard');
 
-// ✅ Login dengan Google
+// Login dengan Google
 Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
-// ✅ Hanya bagian settings yang butuh login
+// Hanya bagian settings yang butuh login
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 

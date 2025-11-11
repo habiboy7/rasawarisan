@@ -29,7 +29,7 @@ class AuthenticationTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect(route('home', absolute: false));
+            ->assertRedirect('/home');
 
         $this->assertAuthenticated();
     }
