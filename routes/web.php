@@ -11,7 +11,10 @@ Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
+
+    Route::redirect('/', '/home');
     Route::redirect('/dashboard', '/home')->name('dashboard');
+
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
