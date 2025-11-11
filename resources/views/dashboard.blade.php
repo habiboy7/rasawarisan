@@ -48,7 +48,7 @@
             <input name="search" type="text" required autofocus autocomplete="off" placeholder="Cari Lokasi..."
                 class="w-full bg-transparent px-4 py-3 text-zinc-700 placeholder-zinc-400 focus:outline-none" />
             <button
-                class="bg-orange-500 hover:bg-orange-600 font-medium px-10 py-3 rounded-lg transition-colors whitespace-nowrap">
+                class="bg-orange-500 text-white hover:bg-orange-600 font-medium px-10 py-3 rounded-lg transition-colors whitespace-nowrap">
                 Cari
             </button>
         </div>

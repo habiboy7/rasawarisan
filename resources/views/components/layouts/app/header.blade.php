@@ -7,11 +7,12 @@
 </head>
 
 <body class="min-h-screen bg-white dark:bg-zinc-800 flex flex-col">
+     
     {{-- navbar --}}
     <flux:header container sticky class="bg-white dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="bars-3" inset="left" />
 
-        <a href="{{ route('dashboard') }}" class="ms-2 me-5 flex items-center space-x-2 rtl:space-x-reverse lg:ms-0"
+        <a href="{{ route('home') }}" class="ms-2 me-5 flex items-center space-x-2 rtl:space-x-reverse lg:ms-0"
             wire:navigate>
             <x-app-logo />
         </a>
@@ -96,7 +97,7 @@
         class="lg:hidden border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
         <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-        <a href="{{ route('dashboard') }}" class="ms-1 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+        <a href="{{ route('home') }}" class="ms-1 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
             <x-app-logo />
         </a>
 
