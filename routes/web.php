@@ -6,14 +6,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\GoogleController;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+// Halaman utama mengarah ke home (tanpa harus login dulu)
+Route::redirect('/', '/home');
+Route::redirect('/dashboard', '/home')->name('dashboard');
+
+// Auth Google
+Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
+
+/*
+|--------------------------------------------------------------------------
+| Protected Routes (hanya untuk user yang login)
+|--------------------------------------------------------------------------
+*/
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('home');
-
-    Route::redirect('/', '/home');
-    Route::redirect('/dashboard', '/home')->name('dashboard');
 
     Route::redirect('settings', 'settings/profile');
 
@@ -32,9 +46,3 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 });
-
-
-
-Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
-
