@@ -6,29 +6,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\GoogleController;
 
-/*
-|--------------------------------------------------------------------------
-| Public Routes
-|--------------------------------------------------------------------------
-*/
+// ✅ Beranda utama bisa diakses semua orang
+Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
-// Halaman utama mengarah ke home (tanpa harus login dulu)
-Route::redirect('/', '/home');
+// Jika masih ada route lama
 Route::redirect('/dashboard', '/home')->name('dashboard');
 
-// Auth Google
+// ✅ Login dengan Google
 Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
-/*
-|--------------------------------------------------------------------------
-| Protected Routes (hanya untuk user yang login)
-|--------------------------------------------------------------------------
-*/
-
+// ✅ Hanya bagian settings yang butuh login
 Route::middleware(['auth'])->group(function () {
-    Route::get('/home', [DashboardController::class, 'index'])->name('home');
-
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('profile.edit');
