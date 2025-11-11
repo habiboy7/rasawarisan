@@ -29,7 +29,7 @@ class GoogleController extends Controller
         if ($user) {
             // login
             Auth::login($user, true);
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/home');
         }
 
         // kalau user dengan email sama sudah ada, hubungkan akun
@@ -42,7 +42,7 @@ class GoogleController extends Controller
                 'avatar' => $googleUser->getAvatar(),
             ]);
             Auth::login($existingUser, true);
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/home');
         }
 
         // buat user baru
@@ -57,6 +57,6 @@ class GoogleController extends Controller
 
         Auth::login($user, true);
 
-        return redirect()->intended('/dashboard')->with('success', 'Berhasil Login');
+        return redirect()->intended('/home')->with('success', 'Berhasil Login');
     }
 }
