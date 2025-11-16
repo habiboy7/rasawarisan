@@ -38,6 +38,3 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('auth/google/redirect', [GoogleController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
-
-Route::get('/destinasi', [RegionController::class, 'index'])->name('destinasi.index');
-Route::get('/destinasi/{slug}', [RegionController::class, 'show'])->name('destinasi.show');

@@ -48,4 +48,15 @@ class Region extends Model
   {
     return $this->hasMany(Region::class, 'parent_id');
   }
+
+  public function dishes()
+  {
+    return $this->hasMany(Dish::class);
+  }
+
+  // Relasi region → partners (UMKM)
+  public function partners()
+  {
+    return $this->hasMany(Partner::class);
+  }
 }
