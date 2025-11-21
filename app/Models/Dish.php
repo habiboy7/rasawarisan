@@ -11,6 +11,7 @@ class Dish extends Model
         'name',
         'slug',
         'region_id',
+        'kabupaten_id',
         'short_description',
         'history',
         'recipe',
@@ -39,6 +40,11 @@ class Dish extends Model
     public function region()
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function kabupaten()
+    {
+        return $this->belongsTo(Region::class, 'kabupaten_id');
     }
 
     public function partners()
