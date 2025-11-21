@@ -9,6 +9,7 @@ class Partner extends Model
     protected $fillable = [
         'user_id',
         'region_id',
+        'kabupaten_id',
         'name',
         'description',
         'logo_url',
@@ -23,7 +24,12 @@ class Partner extends Model
 
     public function region()
     {
-        return $this->belongsTo(Region::class);
+        return $this->belongsTo(Region::class, 'region_id');
+    }
+
+    public function kabupaten()
+    {
+        return $this->belongsTo(Region::class, 'kabupaten_id');
     }
 
     public function owner()
