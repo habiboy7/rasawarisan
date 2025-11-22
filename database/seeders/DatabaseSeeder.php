@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             DishesSeeder::class,
             PartnersSeeder::class,
+            EventSeeder::class,
         ]);
     }
 }

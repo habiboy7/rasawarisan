@@ -24,7 +24,7 @@ class PartnerApiController extends Controller
         return response()->json($partners);
     }
 
-    // GET /api/partner/{id}  (you can also use slug if you add it)
+    // GET /api/partner/{id}  
     public function detail($id)
     {
         $partner = Partner::with(['products.dish'])
