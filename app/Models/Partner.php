@@ -47,4 +47,9 @@ class Partner extends Model
         return $this->belongsToMany(Dish::class, 'partner_products')
             ->withPivot('price', 'image_url');
     }
+
+    public function favoritedBy()
+    {
+        return $this->morphMany(UserFavorite::class, 'favoritable');
+    }
 }

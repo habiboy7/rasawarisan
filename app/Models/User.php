@@ -8,10 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use App\Models\Event;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Event;
+use App\Models\Partner;
+use App\Models\UserLike;
+use App\Models\UserFavorite;
+use App\Models\Dish;
 
 /**
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Event> $events
@@ -78,6 +82,10 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     // Events yang di-save user ini
     public function savedEvents()
     {
@@ -88,5 +96,36 @@ class User extends Authenticatable
     public function partner()
     {
         return $this->hasOne(Partner::class);
+    }
+
+
+    // User's likes 
+    public function likes()
+    {
+        return $this->hasMany(UserLike::class);
+    }
+
+    // Dishes that user liked
+    public function likedDishes()
+    {
+        return $this->morphedByMany(Dish::class, 'likeable', 'user_likes')->withTimestamps();;
+    }
+
+    // User's favorites
+    public function favorites()
+    {
+        return $this->hasMany(UserFavorite::class);
+    }
+
+    // Favorite dishes
+    public function favoriteDishes()
+    {
+        return $this->morphedByMany(Dish::class, 'favoritable', 'user_favorites');
+    }
+
+    // Favorite partners
+    public function favoritePartners()
+    {
+        return $this->morphedByMany(Partner::class, 'favoritable', 'user_favorites');
     }
 }

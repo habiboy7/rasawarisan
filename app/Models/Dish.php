@@ -42,14 +42,41 @@ class Dish extends Model
         return $this->belongsTo(Region::class);
     }
 
+
     public function kabupaten()
     {
         return $this->belongsTo(Region::class, 'kabupaten_id');
     }
 
+
     public function partners()
     {
         return $this->belongsToMany(Partner::class, 'partner_products')
             ->withPivot('price', 'image_url');
+    }
+
+    // Relasi likes (polymorphic)
+    public function likes()
+    {
+        return $this->morphMany(UserLike::class, 'likeable');
+    }
+
+    // Check if user liked this dish
+    public function isLikedBy($userId)
+    {
+        return $this->likes()->where('user_id', $userId)->exists();
+    }
+
+    // Update likes count
+    public function updateLikesCount()
+    {
+        $this->likes_count = $this->likes()->count();
+        $this->save();
+    }
+
+
+    public function favoritedBy()
+    {
+        return $this->morphMany(UserFavorite::class, 'favoritable');
     }
 }
