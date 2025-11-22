@@ -51,12 +51,20 @@ class Region extends Model
 
   public function dishes()
   {
-    return $this->hasMany(Dish::class);
+    if ($this->type === 'provinsi') {
+      return $this->hasMany(Dish::class, 'region_id');
+    }
+    // Kalau type = kabupaten, ambil dishes di kabupaten
+    return $this->hasMany(Dish::class, 'kabupaten_id');
   }
 
   // Relasi region → partners (UMKM)
   public function partners()
   {
-    return $this->hasMany(Partner::class);
+    if ($this->type === 'provinsi') {
+      return $this->hasMany(Partner::class, 'region_id');
+    }
+    // Kalau type = kabupaten, ambil partners di kabupaten
+    return $this->hasMany(Partner::class, 'kabupaten_id');
   }
 }
